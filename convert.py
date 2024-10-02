@@ -710,9 +710,14 @@ print(paths)
 
 
 for path in paths:
-    mjai_data = parse_mjlog_to_mjai(load_mjlog(path))
-    print(mjai_data)
-    # 新建并写入到文件，以utf-8编码
-    with open(os.path.join('mjai', path.split('\\')[1])+".json", 'w', encoding='utf-8') as f:
-        f.write(mjai_data)
+    try:
+        mjai_data = parse_mjlog_to_mjai(load_mjlog(path))
+        print(mjai_data)
+        # 新建并写入到文件，以utf-8编码
+        with open(os.path.join('mjai', path.split('\\')[1])+".json", 'w', encoding='utf-8') as f:
+            f.write(mjai_data)
+    except Exception as e:
+        print(e)
+        print(path)
+        continue
     
